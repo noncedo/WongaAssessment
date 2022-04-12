@@ -3,17 +3,20 @@ using RabbitMQ.Client.Events;
 using System;
 using System.Text;
 
+
 namespace App2
 {
-   static class Program
+    static class Program
     {
+       
         static void Main(string[] args)
         {
-            var factory = new ConnectionFactory
-            {
-                Uri = new Uri("amqp://guest:guest@localhost:5672")
-            };
-
+            ReceiveMessage();
+            Console.ReadLine();
+        }
+        public static void ReceiveMessage()
+        {
+            var factory = new ConnectionFactory { Uri = new Uri("amqp://guest:guest@localhost:5672")};
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
             channel.QueueDeclare("message-queue", durable: true, exclusive: false, autoDelete: false, arguments: null);
@@ -27,9 +30,8 @@ namespace App2
             };
 
             channel.BasicConsume("message-queue", true, consumer);
-            Console.ReadLine();
-
-
+            
         }
+
     }
 }
