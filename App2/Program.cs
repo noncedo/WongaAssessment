@@ -5,7 +5,7 @@ using System.Text;
 
 namespace App2
 {
-    class Program
+   static class Program
     {
         static void Main(string[] args)
         {
@@ -14,7 +14,6 @@ namespace App2
                 Uri = new Uri("amqp://guest:guest@localhost:5672")
             };
 
-            //used default connection
             var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
             channel.QueueDeclare("message-queue", durable: true, exclusive: false, autoDelete: false, arguments: null);
@@ -25,7 +24,6 @@ namespace App2
                 var body = e.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
                 Console.WriteLine("Hello {0}, I am your Father !", message);
-              
             };
 
             channel.BasicConsume("message-queue", true, consumer);

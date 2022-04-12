@@ -14,18 +14,12 @@ namespace App1
                 Uri = new Uri("amqp://guest:guest@localhost:5672")
             };
 
-            //used default connection
              var connection = factory.CreateConnection();
             var channel = connection.CreateModel();
             channel.QueueDeclare("message-queue", durable: true, exclusive: false, autoDelete: false, arguments: null);
-
-            string name = "";
-            Console.Write("Enter your name: ");
-            name = Console.ReadLine();
-            Console.ReadLine();
-
-            var message = new { Name = "Producer", Message = name };
-            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
+            
+            var message = new { Name = "Producer", Message = "Noncedo" };
+            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message.Message));
 
             channel.BasicPublish("", "message-queue", null, body);
           
