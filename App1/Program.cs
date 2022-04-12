@@ -6,7 +6,11 @@ namespace App1
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            string name = "";
+            Console.Write("Enter your name: ");
+            name = Console.ReadLine();
+            Console.ReadLine();
+          
         }
     }
 }
