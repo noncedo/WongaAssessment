@@ -11,8 +11,8 @@ namespace App1
         {
             string name = "Noncedo";
             SendMessage(name);
-          
         }
+
         public static void SendMessage(string name)
         {
             var factory = new ConnectionFactory { Uri = new Uri("amqp://guest:guest@localhost:5672") };
@@ -26,5 +26,9 @@ namespace App1
 
             channel.BasicPublish("", "message-queue", null, body);
         }
+
     }
+   
+
+    
 }
