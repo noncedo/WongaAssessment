@@ -1,5 +1,7 @@
-﻿using RabbitMQ.Client;
+﻿using Newtonsoft.Json;
+using RabbitMQ.Client;
 using System;
+using System.Text;
 
 namespace App1
 {
@@ -23,8 +25,9 @@ namespace App1
             Console.ReadLine();
 
             var message = new { Name = "Producer", Message = name };
+            var body = Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(message));
 
-          
+            channel.BasicPublish("", "message-queue", null, body);
           
         }
     }
