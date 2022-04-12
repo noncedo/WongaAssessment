@@ -14,6 +14,7 @@ namespace App2
             ReceiveMessage();
             Console.ReadLine();
         }
+    
         public static void ReceiveMessage()
         {
             var factory = new ConnectionFactory { Uri = new Uri("amqp://guest:guest@localhost:5672") };
@@ -26,7 +27,7 @@ namespace App2
             {
                 var body = e.Body.ToArray();
                 var message = Encoding.UTF8.GetString(body);
-                Console.WriteLine(@"Hello {0},  I am your Father !", message);
+                Console.WriteLine("Hello {0},  I am your Father!", message);
             };
 
             channel.BasicConsume("message-queue", true, consumer);
